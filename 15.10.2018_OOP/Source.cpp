@@ -96,39 +96,45 @@ public:
 class time_
 {
 private:
-	int h, m, s;
+	int *h=new int;
+	int *m = new int;
+	int *s = new int;
 public:
+	time_ ()
+	{
+		h = new int[3];
+	}
 	void setH(int a)
 	{
 		if (a > 23 || a < 0)
 		{
-			h = 0;
+			h[0] = 0;
 		}
 		else
 		{
-			h = a;
+			h[0] = a;
 		}
 	}
 	void setM(int b)
 	{
 		if (b > 59 || b < 0)
 		{
-			m = 0;			
+			h[1] = 0;
 		}
 		else
 		{
-			m = b;
+			h[1] = b;
 		}
 	}
 	void setS(int c)
 	{
 		if (c > 59 || c < 0)
 		{
-			s = 0;			
+			h[2] = 0;
 		}
 		else
 		{
-			s = c;
+			h[2] = c;
 		}
 	}
 	int getH() { return h; }
@@ -143,17 +149,17 @@ public:
 
 	void printTime()
 	{
-		if (h < 10)cout << "0";
+		if (*h < 10)cout << "0";
 		cout << h << ":";
-		if (m < 10) cout << "0";
+		if (*m < 10) cout << "0";
 		cout << m << ":";
-		if (s < 10) cout << "0";
+		if (*s < 10) cout << "0";
 		cout << s;
 	}
 	void addHour()
 	{
 		h++;
-		if (h == 24)
+		if (*h == 24)
 		{
 			h = 0;
 		}
@@ -161,7 +167,7 @@ public:
 	void addMinute()
 	{
 		m++;
-		if (m == 60)
+		if (*m == 60)
 		{
 			addHour();
 			m = 0;
@@ -170,7 +176,7 @@ public:
 	void addSecond()
 	{
 		s++;
-		if (s == 60)
+		if (*s == 60)
 		{
 			addMinute();
 			s = 0;
